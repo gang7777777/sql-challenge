@@ -1,19 +1,20 @@
 ﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
--- Creating employees table with primary key
+-- Creating employees table with primary key and foreign key
 
 CREATE TABLE employees (
-    emp_no int   NOT NULL,
-    emp_title_id varchar   NOT NULL,
-    birth_date date   NOT NULL,
-    first_name varchar   NOT NULL,
-    last_name varchar   NOT NULL,
-    sex varchar   NOT NULL,
-    hire_date date   NOT NULL,
-    CONSTRAINT pk_employees PRIMARY KEY (
-        emp_no
-     )
+    emp_no int NOT NULL,
+    emp_title_id varchar(255) NOT NULL,
+    birth_date date NOT NULL,
+    first_name varchar(255) NOT NULL,
+    last_name varchar(255) NOT NULL,
+    sex varchar(255) NOT NULL,
+    hire_date date NOT NULL,
+    PRIMARY KEY (emp_no),
+	CONSTRAINT fk_emp_title_id
+	FOREIGN KEY (emp_title_id)
+	REFERENCES titles(title_id)
 );
 
 SELECT * FROM employees;
@@ -21,11 +22,9 @@ SELECT * FROM employees;
 -- Creating titles table with primary key
 
 CREATE TABLE titles (
-    title_id varchar   NOT NULL,
-    title varchar   NOT NULL,
-    CONSTRAINT pk_titles PRIMARY KEY (
-        title_id
-     )
+    title_id varchar(255) NOT NULL,
+    title varchar(255) NOT NULL,
+    PRIMARY KEY (title_id)
 );
 
 SELECT * FROM titles;
@@ -35,9 +34,13 @@ SELECT * FROM titles;
 CREATE TABLE dept_manager (
     emp_no int   NOT NULL,
     dept_no varchar   NOT NULL,
-    CONSTRAINT pk_dept_manager PRIMARY KEY (
-        emp_no
-     )
+    PRIMARY KEY (emp_no),
+	CONSTRAINT fk_dept_no
+	FOREIGN KEY (dept_no)
+	REFERENCES departments(dept_no),
+	CONSTRAINT fk_emp_no
+	FOREIGN KEY (emp_no)
+	REFERENCES employees(emp_no)
 );
 
 SELECT * FROM dept_manager;
@@ -47,7 +50,13 @@ SELECT * FROM dept_manager;
 CREATE TABLE dept_emp (
     emp_no int  NOT NULL,
     dept_no varchar NOT NULL,
-    PRIMARY KEY (emp_no,dept_no)
+    PRIMARY KEY (emp_no,dept_no),
+	CONSTRAINT fk_dept_no
+	FOREIGN KEY (dept_no)
+	REFERENCES departments(dept_no),
+	CONSTRAINT fk_emp_no
+	FOREIGN KEY (emp_no)
+	REFERENCES employees(emp_no)
 );
 
 SELECT * FROM dept_emp;
@@ -57,9 +66,7 @@ SELECT * FROM dept_emp;
 CREATE TABLE departments (
     dept_no varchar   NOT NULL,
     dept_name varchar   NOT NULL,
-    CONSTRAINT pk_departments PRIMARY KEY (
-        dept_no
-     )
+    PRIMARY KEY (dept_no)
 );
 
 SELECT * FROM departments;
@@ -69,9 +76,10 @@ SELECT * FROM departments;
 CREATE TABLE salaries (
     emp_no int   NOT NULL,
     salary int   NOT NULL,
-    CONSTRAINT pk_salaries PRIMARY KEY (
-        emp_no
-     )
+    PRIMARY KEY (emp_no),
+	CONSTRAINT fk_emp_no
+	FOREIGN KEY (emp_no)
+	REFERENCES employees(emp_no)
 );
 
 SELECT * FROM salaries;
