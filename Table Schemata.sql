@@ -32,8 +32,8 @@ SELECT * FROM titles;
 -- Creating dept_manager table with primary key and foreign keys
 
 CREATE TABLE dept_manager (
-    emp_no int   NOT NULL,
-    dept_no varchar   NOT NULL,
+    emp_no int NOT NULL,
+    dept_no varchar(255) NOT NULL,
     PRIMARY KEY (emp_no),
 	CONSTRAINT fk_dept_no
 	FOREIGN KEY (dept_no)
@@ -48,8 +48,8 @@ SELECT * FROM dept_manager;
 -- Creating dept_emp table with composite key and foreign keys
 
 CREATE TABLE dept_emp (
-    emp_no int  NOT NULL,
-    dept_no varchar NOT NULL,
+    emp_no int NOT NULL,
+    dept_no varchar(255) NOT NULL,
     PRIMARY KEY (emp_no,dept_no),
 	CONSTRAINT fk_dept_no
 	FOREIGN KEY (dept_no)
@@ -64,8 +64,8 @@ SELECT * FROM dept_emp;
 -- Creating departments table with primary key
 
 CREATE TABLE departments (
-    dept_no varchar   NOT NULL,
-    dept_name varchar   NOT NULL,
+    dept_no varchar(255) NOT NULL,
+    dept_name varchar(255) NOT NULL,
     PRIMARY KEY (dept_no)
 );
 
@@ -74,8 +74,8 @@ SELECT * FROM departments;
 -- Creating salaries table with primary key and foreign key
 
 CREATE TABLE salaries (
-    emp_no int   NOT NULL,
-    salary int   NOT NULL,
+    emp_no int NOT NULL,
+    salary int NOT NULL,
     PRIMARY KEY (emp_no),
 	CONSTRAINT fk_emp_no
 	FOREIGN KEY (emp_no)
