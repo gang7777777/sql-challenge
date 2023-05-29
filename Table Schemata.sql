@@ -29,7 +29,7 @@ CREATE TABLE titles (
 
 SELECT * FROM titles;
 
--- Creating dept_manager table with primary key
+-- Creating dept_manager table with primary key and foreign keys
 
 CREATE TABLE dept_manager (
     emp_no int   NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE dept_manager (
 
 SELECT * FROM dept_manager;
 
--- Creating dept_emp table with composite key
+-- Creating dept_emp table with composite key and foreign keys
 
 CREATE TABLE dept_emp (
     emp_no int  NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE departments (
 
 SELECT * FROM departments;
 
--- Creating salaries table with primary key
+-- Creating salaries table with primary key and foreign key
 
 CREATE TABLE salaries (
     emp_no int   NOT NULL,
